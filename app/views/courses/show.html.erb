@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+<h3 align="center" style="text-shadow: 5px 5px 10px black"><%=@course.title%></h3>
+<div align="center" >
+  <img alt="Responsive Design" src="<%=@course.image%>" style="width:80%;height:300px;box-shadow: 10px 10px 5px #888888">
+</div>
+<table>
+  <tr>
+    <td></td>
+  </tr>
+</table>
+
+<div class="container">
+  <div class="jumbotron">
+    <table>
+      <tr>
+        <td><label>Description:</label></td><td><%= raw @course.desc%></td>
+      </tr>
+      <tr>
+        <td><label>By:</label></td><td><strong><%= @course.user.name%></strong></td>
+      </tr>
+
+        <td><label>Lectures:</label></td>
+        <% @course.lectures.each do |lecture|%>
+          <tr>
+            <td><h4><%= link_to lecture.title, lecture %></h4></td>
+          </tr>
+
+        <% end %>
+
+    </table>
+  </div>
+</div>
+
+</p>
+
+<div align="center">
+  <% if  (current_user.id == @course.user_id )&&(current_user.role == "instructor")%>
+      <button><%= link_to 'Edit', edit_course_path(@course) %></button>
+
+        <a class="btn btn-primary" style="text-decoration: none" href="/lectures/new">Add Lecture</a>
+
+  <%end%>
+  <button><%= link_to 'Back', courses_path %></button>
+</div>
+

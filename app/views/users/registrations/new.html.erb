@@ -1,0 +1,63 @@
+<div style="height:20px "></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div style="height:100px "></div>
+      <image src="/images/programming-languages1.png" class="img-responsive"></image>
+    </div>
+
+    <div class="col-md-6">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :bdate %><br />
+      <%= f.date_field :bdate%>
+    </div>
+
+    <div class="field">
+      <%= f.label :gender %><br />
+      <%= f.select(:gender, ['male','female']) %>
+    </div>
+          <div class="field ">
+            <%= f.label :role %><br/>
+            <%= f.select :role,options_for_select(['instructor','user']) %>
+          </div>
+
+    <div class="field">
+      <%= f.label :image %><br />
+      <%= f.file_field :image %>
+    </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email%>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "users/shared/links" %>
+    </div>
+  </div>
+</div>

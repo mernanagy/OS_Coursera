@@ -1,0 +1,8 @@
+
+<%if current_user.id == @lecture.user_id%>
+  <%= render 'form' %>
+
+  <%= link_to 'Show', @lecture %>
+  <%= link_to 'Back', lectures_path %>
+
+<%end%>

@@ -1,0 +1,13 @@
+<%= div_for(comment) do  %>
+
+    <p>
+      <strong>
+        Posted <%= time_ago_in_words(comment.created_at) %>
+      </strong><br>
+      <%= h(comment.cont) %>
+      <% if current_user.id ==  comment.user_id %>
+          <%= link_to 'Edit', edit_lecture_comment_path(comment.lecture,comment),class:"btn btn-primary" %> |
+          <%= link_to 'Delete', lecture_comment_path(comment.lecture,comment), method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-primary" %>
+      <% end %>
+    </p>
+<% end %>

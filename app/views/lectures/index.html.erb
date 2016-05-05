@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <div style="box-shadow: 10px 10px 5px #888888" class="jumbotron">
+    <h1 align="center"> Listing Lectures</h1>
+  </div>
+</div>
+
+<table class=" table table-responsive table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Attachment</th>
+      <th>User</th>
+      <th>Course</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lectures.each do |lecture| %>
+      <tr>
+        <td><%= lecture.title %></td>
+        <td><a href="<%= lecture.attachment_url %>" download>Download Lecture</a></td>
+        <td><%= lecture.user.name %></td>
+        <td><%= lecture.course.title %></td>
+        <td><a class="btn btn-success" style="text-decoration: none"  href="/lectures/<%=lecture.id%>"> Show </a></td>
+        <%if current_user.id == lecture.user_id%>
+        <td><a class="btn btn-warning" style="text-decoration: none"  href="/lectures/<%=lecture.id%>/edit"> Edit </a></td>
+        <td><%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger" %></td>
+         <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if (current_user.role == "instructor") %>
+<div align="center">
+  <a class="btn btn-primary" style="text-decoration: none" href="/lectures/new">Add Lecture</a>
+</div>
+<%end%>
+

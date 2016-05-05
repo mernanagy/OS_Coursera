@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="jumbotron">
+    <h2 align="center"><%=@lecture.title%></h2>
+  <div align="center">
+    <strong>Created By:</strong>
+    <%= @lecture.user.name %>
+    <strong>Course:</strong>
+    <%= @lecture.course.title %>
+  </div>
+    <p><%=raw @lecture.content%></p>
+
+    <div align="right">
+      <a href="<%= @lecture.attachment_url %>" download><h4>Download Lecture</h4></a>
+    </div>
+  </div>
+  <div class="text-align:center;" align="center">
+    <%= link_to like_lecture_path(@lecture), class:"like" , method: :put do %>
+        <button type="button" class="btn btn-info" aria-label="Left Align">
+
+          <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center " aria-hidden="true"> </span>
+          <span class="bage"><%= @lecture.get_upvotes.size %></span>
+        </button>
+
+    <% end  %>
+
+
+    <%= link_to unlike_lecture_path(@lecture), class:"like" , method: :put do %>
+        <button type="button" class="btn btn-info" aria-label="Left Align">
+
+          <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center " aria-hidden="true"> </span>
+          <span class="bage"><%= @lecture.get_downvotes.size %></span>
+        </button>
+
+    <% end  %>
+
+  </div>
+</div>
+<h2 align="center">Comments</h2>
+<div id="comments">
+  <%= render :partial => @lecture.comments %>
+</div>
+<%= simple_form_for [@lecture ,Comment.new] do |f| %>
+    <p>
+      <%= f.input :cont , :lable => "NEW COMMENT" , as: :text , input_html: { row:"3" } %>
+    </p>
+    <div class="btn">
+      <%= f.submit "Add Comment " , class:'btn btn-primary'  %>
+    </div>
+<% end %>
+<div align="center">
+<%if current_user.id == @lecture.user_id%>
+ <button><%= link_to 'Edit', edit_lecture_path(@lecture) %></button>
+  <%end%>
+ <button> <%= link_to 'Back', lectures_path %></button>
+</div>

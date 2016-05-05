@@ -1,0 +1,10 @@
+<% if current_user.id == @course.user_id%>
+
+<%= render 'form' %>
+
+
+    <%= link_to 'Show', @course %>
+    <%= link_to 'Back', courses_path %>
+
+<%end%>
+
